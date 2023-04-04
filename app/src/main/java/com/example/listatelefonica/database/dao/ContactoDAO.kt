@@ -3,6 +3,7 @@ package com.example.listatelefonica.database.dao
 import androidx.room.*
 import com.example.listatelefonica.model.Contacto
 
+
 @Dao
 interface ContactoDAO {
 

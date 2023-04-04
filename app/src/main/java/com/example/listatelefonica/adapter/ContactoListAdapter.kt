@@ -7,15 +7,14 @@ import com.example.listatelefonica.R
 import com.example.listatelefonica.adapter.listener.ContactoOnClickListener
 import com.example.listatelefonica.adapter.viewholder.ContactoViewHolder
 import com.example.listatelefonica.model.Contacto
-
 class ContactoListAdapter(
     private val contactoList: List<Contacto>,
     private val contactoOnClickListener: ContactoOnClickListener
 ) : RecyclerView.Adapter<ContactoViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactoViewHolder {
         return ContactoViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.row_contacto, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.row_contacto, parent, false)
         )
     }
 
@@ -37,4 +36,6 @@ class ContactoListAdapter(
             contactoOnClickListener.clickListener(contacto)
         }
     }
+
+
 }

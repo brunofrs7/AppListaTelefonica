@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.listatelefonica.database.dao.ContactoDAO
 import com.example.listatelefonica.model.Contacto
 
+
 @Database(entities = [Contacto::class], version = 1)
 abstract class DatabaseHelper : RoomDatabase() {
 
@@ -16,7 +17,7 @@ abstract class DatabaseHelper : RoomDatabase() {
         private lateinit var INSTANCE: DatabaseHelper
 
         fun getDatabase(context: Context): DatabaseHelper {
-            if (!Companion::INSTANCE.isInitialized) {
+            if (!::INSTANCE.isInitialized) {
                 synchronized(DatabaseHelper::class.java) {
                     INSTANCE = Room.databaseBuilder(context, DatabaseHelper::class.java, "database")
                         .allowMainThreadQueries()
