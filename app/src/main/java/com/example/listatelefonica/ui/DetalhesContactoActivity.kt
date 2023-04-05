@@ -1,6 +1,7 @@
 package com.example.listatelefonica.ui
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -81,8 +82,18 @@ class DetalhesContactoActivity : AppCompatActivity() {
 
         binding.buttonVoltar.setOnClickListener { finish() }
 
-        binding.imagemTelefone.setOnClickListener { }
-        binding.imagemEmail.setOnClickListener { }
+        binding.imagemTelefone.setOnClickListener {
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+            dialIntent.data = Uri.parse("tel:" + contacto.telefone)
+            startActivity(dialIntent)
+        }
+        binding.imagemEmail.setOnClickListener {
+            val destinatario = contacto.email
+            val assunto = "Contacto"
+            val mensagem = "Enviado de ListaTelefonica APP"
+
+            sendEmail(destinatario, assunto, mensagem)
+        }
 
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.data != null && it.resultCode == 1) {
@@ -93,6 +104,21 @@ class DetalhesContactoActivity : AppCompatActivity() {
             }
         }
         changeEditable(false)
+    }
+
+    private fun sendEmail(destinatario: String, assunto: String, mensagem: String) {
+        val i = Intent(Intent.ACTION_SEND)
+        i.data = Uri.parse("mailto:")
+        i.type = "text/plain"
+        i.putExtra(Intent.EXTRA_EMAIL, arrayOf(destinatario))
+        i.putExtra(Intent.EXTRA_SUBJECT, assunto)
+        i.putExtra(Intent.EXTRA_TEXT, mensagem)
+
+        try {
+            startActivity(Intent.createChooser(i, "Escolha o cliente de email"))
+        } catch (e: java.lang.Exception) {
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun changeEditable(status: Boolean) {
