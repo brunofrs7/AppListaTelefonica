@@ -1,0 +1,3 @@
+# AppListaTelefonica  
+  
+App de criação de uma Lista Telefónica para Android com Kotlin, projeto desenvolvido no curso: [Crie uma APP de Lista Telefónica com ANDROID em KOTLIN](https://www.udemy.com/)
